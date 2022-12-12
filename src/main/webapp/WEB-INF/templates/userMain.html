@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="userCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="userCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="userCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4" th:text="${member.memberName} + '的主页'"></h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">主页</li>
+                </ol>
+            </div>
+            <div class="OutBox" >
+                <div id="main" style="width: 400px;height:300px;" ></div>
+                <div class="test" style="width: 300px;height:200px"></div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:include="userCommon::common-scripts"></div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/echarts@3.8.5/dist/echarts.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '6666'
+        },
+        tooltip: {},
+        legend: {
+            /* data: ['销量']*/
+        },
+        xAxis: {
+            data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '销量',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    //***********
+    var mCharts = echarts.init(document.querySelector(".test"))
+    var option = {
+        title: {
+            text: '7777',
+            textStyle: { // 控制标题的文字样式
+                color: 'red'
+            }
+        },
+        series: [
+            {
+                type: 'pie',
+                data: [{
+                    value: 11231,
+                    name: "淘宝",
+                    // 控制淘宝这一区域的样式
+                    itemStyle: { color: 'yellow'},
+                    label: {color: 'green'},
+                    emphasis: {
+                        // 控制淘宝这一区域的样式
+                        itemStyle: { color: 'pink'},
+                        label: { color: 'black'}
+                    }
+                },
+                    {value: 22673,name: "京东"},
+                    {value: 6123,name: "唯品会",},
+                    { value: 8989, name: "1号店"},
+                    {value: 6700, name: "聚美优品"}]
+            }
+        ]
+    }
+
+    mCharts.setOption(option)
+
+
+
+</script>
+<style>
+    #layoutSidenav_content{
+        display: block !important;
+    }
+    .OutBox{
+        display: flex;
+        justify-content: space-around;
+    }
+</style>
+</html>

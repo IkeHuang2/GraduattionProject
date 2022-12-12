@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyz.mapper.AdminMapper">
+
+    <select id="selectByAccountAndPassword" resultType="com.hyz.pojo.Admin" >
+    SELECT * FROM admin WHERE admin_account=#{adminAccount} AND admin_password=#{adminPassword}
+    </select>
+
+</mapper>

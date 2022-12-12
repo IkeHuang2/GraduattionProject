@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyz.mapper.PrivateClassOrderMapper">
+
+    <select id="findAll" resultType="classOrder">
+        SELECT *
+        FROM class_order
+    </select>
+
+    <select id="selectByClassId" parameterType="java.lang.Integer" resultType="com.hyz.pojo.PrivateClassTable">
+        select * from privated_class_table where class_Id=#{classId}
+    </select>
+
+    <select id="selectMemberByClassIdAndMemberAccount" parameterType="java.lang.Integer" resultType="com.hyz.pojo.PrivateClassOrder" >
+         SELECT *
+        FROM privated_class_order
+        WHERE class_id = #{classId}
+          AND member_account = #{memberAccount}
+    </select>
+
+    <insert id="insertClassOrder" parameterType="com.hyz.pojo.PrivateClassOrder">
+        INSERT INTO privated_class_order(class_order_id, class_id, class_name, coach, member_name, member_account)
+        VALUES (#{classOrderId}, #{classId}, #{className}, #{coach}, #{memberName}, #{memberAccount})
+    </insert>
+
+    <select id="selectClassOrderByMemberAccount" parameterType="java.lang.Integer" resultType="com.hyz.pojo.PrivateClassOrder">
+        select * from privated_class_order where member_account=#{memberAccount}
+    </select>
+
+    <select id="selectMemberOrderList" parameterType="java.lang.Integer" resultType="com.hyz.pojo.PrivateClassOrder">
+        select * from privated_class_order where class_id=#{classId}
+    </select>
+
+</mapper>

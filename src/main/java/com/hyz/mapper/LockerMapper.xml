@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyz.mapper.LockerMapper">
+    <update id="updateLockerStatusByMemberAccount" parameterType="java.lang.Integer" >
+        update locker set locker_status=1 , memberAccount=#{memberAccount} where locker_number=#{lockerNumberId}
+    </update>
+    <select id="getAll" resultType="com.hyz.pojo.Locker">
+        select * from locker
+    </select>
+    <update id="resetBox" parameterType="java.lang.Integer">
+        update locker set locker_status=0,memberAccount=0 where locker_number=#{lockerNumberId};
+    </update>
+    <select id="getInfoByMemberId"  parameterType="java.lang.Integer" resultType="com.hyz.pojo.Locker">
+        select * from locker where locker_number=#{lockerNumberId};
+    </select>
+</mapper>

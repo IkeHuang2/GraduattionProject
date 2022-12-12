@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">编辑器材</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/equipment/selEquipment}">器材管理</a></li>
+                    <li class="breadcrumb-item active">编辑器材</li>
+                </ol>
+
+                <div class="card mb-4">
+
+                    <form th:action="@{/video/updateVideoById}" method="post">
+                        <div th:each="lv:${videoList}">
+                            <table class="table table-hover">
+                                <tr>
+                                    <td text-align="center">视频序号：</td>
+                                    <td><input type="text" class="form-control" readonly="readonly"
+                                               th:value="${lv.videoId}" name="videoId">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td text-align="center">视频名称：</td>
+                                    <td><input type="text" class="form-control" th:value="${lv.videoName}"
+                                               name="videoName"></td>
+                                </tr>
+                                <tr>
+                                    <td text-align="center">更新视频：</td>
+                                    <td><input type="file" id="upload" onchange="getFile(value)" class="form-control"
+                                               th:value="${lv.videoName}"
+                                               name="videoSrcName"></td>
+                                </tr>
+                            </table>
+                            <div style="text-align:center;margin-bottom:15px">
+                                <input type="submit" class="btn btn-outline-success" value="确认修改">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+</body>
+<script>
+    function getFile(value) {
+        // 获取文本框dom
+        let doc = document.getElementById('doc');
+        // 获取上传控件dom
+        let upload = document.getElementById('upload');
+        // 获取文件名
+        let fileName = upload.files[0].name;
+        // 获取文件路径
+        let filePath = upload.value;
+        // 将文件名载入文本框
+        doc.value = fileName;
+
+        let Name="/GraduattionProject_war_exploded/static/video/"+document.getElementsByName("videoSrcName")+".MP4";
+        console.log(Name)
+    }
+</script>
+</html>

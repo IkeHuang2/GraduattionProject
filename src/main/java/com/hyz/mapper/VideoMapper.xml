@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyz.mapper.VideoMapper">
+    <resultMap id="videoMap" type="com.hyz.pojo.Video">
+        <id column="video_Name" property="videoName"/>
+        <result column="video_Src" property="videoSrcName"/>
+    </resultMap>
+    <select id="getAll" resultType="com.hyz.pojo.Video">
+        select * from video
+    </select>
+
+    <select id="selectByVideoId" parameterType="java.lang.Integer" resultType="com.hyz.pojo.Video">
+        select * from video where video_Id=#{videoId}
+    </select>
+
+    <update id="updateVideoById">
+        update video set video_Src=concat("/GraduattionProject_war_exploded/static/video/",#{param2})
+        where video_Id=#{param1}
+    </update>
+</mapper>

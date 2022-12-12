@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header">
+
+</head>
+<body class="sb-nav-fixed" onload="insert()">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">添加柜子用户</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/locker/toLockerManage}">储物柜管理</a></li>
+                    <li class="breadcrumb-item active" id="lockerNumberId" ></li>
+                </ol>
+
+                <div class="card mb-4">
+                    <table class="table table-hover">
+                        <tr>
+                            <td text-align="center">卡号：</td>
+                            <td><input type="text" class="form-control" placeholder="请输入卡号" required id="inputMemberAccount" name="memberAccount">
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+                        <input type="submit" class="btn btn-outline-success" value="添加"  onclick="test()"/>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+<script type="text/javascript">
+    let lockerNumberId=sessionStorage.getItem("locker_number");
+    function insert() {
+        document.getElementById("lockerNumberId").innerHTML=lockerNumberId;
+    }
+    function test(event){
+        const tempInput = document.querySelector("#inputMemberAccount");
+        const memberAccount = tempInput.value;
+        console.log(`${memberAccount} -------- ${lockerNumberId}`)
+        fetch("http://localhost:8080/GraduattionProject_war_exploded/locker/addLockerMember?memberAccount="+memberAccount+"&lockerNumberId="+lockerNumberId)
+            .then((res)=>res)
+            .then((data)=>{
+                if(data.status === 200){
+                    location.replace("../locker/getAllBox");
+                }
+            })
+
+    }
+</script>
+</body>
+</html>
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header">
+
+</head>
+
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">视频管理页</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li class="breadcrumb-item active">视频管理</li>
+                </ol>
+            </div>
+        </main>
+        <div class="box" th:each="list:${listVideo}">
+            <div class="inBox">
+            <div th:text="${list.videoName}"></div>
+            <video th:src="${list.videoSrc}" controls width="190px" height="140px">
+            </video>
+             <a th:href="@{/video/toUpdateVideo(videoId=${list.videoId})}"
+                 style="text-decoration: none">
+                 <input type="button" class="btn btn-sm btn-outline-primary" value="编辑">
+             </a>
+            </div>
+        </div>
+
+        <!--<footer th:replace="adminCommon::common-footer"></footer>-->
+    </div>
+</div>
+<div th:include="adminCommon::common-scripts"></div>
+</body>
+<style>
+    #layoutSidenav_content{
+        display: block !important;
+    }
+    .inBox{
+        float: left;
+        display: inline;
+        text-align: center;
+    }
+.box{
+    float: left;
+    display: flex;
+    width: 215px;
+    height: 200px;
+    /*background-color: coral;*/
+    margin-right: 20px;
+    margin-top: 20px;
+}
+</style>
+<script>
+    function edit(video_Name) {
+        window.sessionStorage.setItem("video_Name",video_Name);
+
+    }
+</script>
+</html>

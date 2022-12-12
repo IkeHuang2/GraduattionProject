@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header">
+
+</head>
+
+<body class="sb-nav-fixed">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">管理员主页</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">主页</li>
+                </ol>
+            </div>
+
+        </main>
+        <div class="box" th:each="list:${lists}">
+            <div class="num" th:text="'柜子序号：'+${list.lockerNumber}"  th:onclick="boxInfo([[${list.lockerNumber}]])"></div>
+            <div class="btn_container">
+                <button class="btn" th:disabled="${list.lockerStatus}"  th:onclick="add([[${list.lockerNumber}]])">添加</button>
+                <button class="btn" th:onclick="reset([[${list.lockerNumber}]])" >重置</button>
+            </div>
+        </div>
+        <!--<footer th:replace="adminCommon::common-footer"></footer>-->
+    </div>
+</div>
+<div th:include="adminCommon::common-scripts"></div>
+</body>
+<style>
+    #layoutSidenav_content{
+        display: block !important;
+    }
+    button{
+        background-color: crimson;
+    }
+    .test{
+        font-size: 128px;
+    }
+    .test:nth-child(odd){
+        font-size: 10rem;
+    }
+    /*//FONTSIZE 尽可能用rem*/
+    /*//宽度的话，用display：flex；或者display:grid；width: $vw，或者%，height和width一样*/
+
+    .box{
+        float: left;
+        display: flex;
+        flex-direction: column;
+        margin: 1em;
+        color: white;
+        width: 120px;
+    }
+    .num{
+        width: 100px;
+        height: 100px;
+        background-color:#333;
+    }
+    .btn{
+        color: white;
+        background-color: chocolate;
+        width: 50px;
+        font-size: .6rem;
+    }
+    .btn_container{
+        display: flex;
+    }
+</style>
+<script>
+    // aa();
+    function boxInfo(locker_number) {
+        window.sessionStorage.setItem("locker_number",locker_number);
+        location.replace("../locker/toLockerInformation?lockerNumberId="+locker_number);
+    }
+    function add(locker_number){
+        window.sessionStorage.setItem("locker_number",locker_number);
+        window.location.href = "./toAddLockerMember"
+    }
+    function reset(locker_number){
+        fetch("http://localhost:8080/GraduattionProject_war_exploded/locker/returnBox?lockerNumberId="+locker_number)
+            .then((res)=>res)
+            .then((data)=>{
+                if(data.status===200)
+                {
+                    location.reload();
+                }
+            })
+    }
+</script>
+</html>

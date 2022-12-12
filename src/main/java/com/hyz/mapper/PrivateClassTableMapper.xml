@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hyz.mapper.PrivateClassTableMapper">
+    <select id="findAll" resultType="com.hyz.pojo.PrivateClassTable" >
+        select * from privated_class_table
+    </select>
+
+    <select id="selectByClassId" parameterType="java.lang.Integer" resultType="com.hyz.pojo.PrivateClassTable">
+        SELECT *
+        FROM privated_class_table
+        WHERE class_id = #{classId}
+    </select>
+
+    <insert id="insertClass" parameterType="com.hyz.pojo.PrivateClassTable">
+        INSERT INTO privated_class_table(class_id, class_name, class_time, coach)
+        VALUES (#{classId}, #{className},#{classTime}, #{coach})
+    </insert>
+</mapper>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="userCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="userCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="userCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">我的课程</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toUserMain}">主页</a></li>
+                    <li class="breadcrumb-item active">我的课程</li>
+                </ol>
+            </div>
+            <div class="box" th:each="list:${listVideo}" >
+                <div class="inBox">
+                <div th:text="${list.videoName}"></div>
+                <video th:src="${list.videoSrc}" controls width="190px" height="140px">
+                </video>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<div th:include="userCommon::common-scripts"></div>
+</body>
+<style>
+    #layoutSidenav_content{
+        display: block !important;
+    }
+    .inBox{
+         float: left;
+         display: inline;
+         text-align: center;
+     }
+    .box{
+        float: left;
+        display: flex;
+        width: 215px;
+        height: 200px;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+</style>
+</html>

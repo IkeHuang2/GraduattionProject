@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="userCommon::common-header"></head>
+<body class="sb-nav-fixed">
+<nav th:replace="userCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="userCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">课程管理</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li class="breadcrumb-item active">课程管理</li>
+                </ol>
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        课程信息表
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple">
+                            <thead>
+                            <tr>
+                                <th>课程号</th>
+                                <th>课程名字</th>
+                                <th>课程时长</th>
+                                <th>教练名字</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="list:${privateClassTableList}">
+                                <td th:text="${list.classId}">课程号</td>
+                                <td th:text="${list.className}">课程名字</td>
+                                <td th:text="${list.classTime}">课程时长</td>
+                                <td th:text="${list.coach}">教练名字</td>
+                                <!--<td th:text="111">操作</td>-->
+                                <td>
+                                    <!--<a th:href="@{/class/selClassOrder(classId=${class.classId})}"
+                                       style="text-decoration: none">
+                                        <input type="button" class="btn btn-sm btn-outline-secondary" value="报名信息">
+                                    </a>-->
+                                    <a th:href="@{/privateClass/toAddPrivateClass(classId=${list.classId})}"
+                                       style="text-decoration: none">
+                                    <input type="button" class="btn btn-sm btn-outline-secondary" value="报名">
+                                    </a>
+                                    <!--<a th:href="@{/class/delClass(classId=${class.classId})}"
+                                       style="text-decoration: none">
+                                        <input type="button" class="btn btn-sm btn-outline-danger"
+                                               onclick="return del()" value="删除">
+                                    </a>-->
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+                    <a th:href="@{/privateClass/toAddPrivateClass}">
+                        <input type="button" class="btn btn-outline-success" value="添加课程信息">
+                    </a>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+        </main>
+    </div>
+</div>
+<div th:include="userCommon::common-scripts"></div>
+</body>
+</html>

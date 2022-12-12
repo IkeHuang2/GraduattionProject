@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="adminCommon::common-header">
+
+</head>
+<body class="sb-nav-fixed" onload="insert()">
+<nav th:replace="adminCommon::common-navbar"></nav>
+<div id="layoutSidenav">
+    <div th:replace="adminCommon::common-sidenav"></div>
+
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">用户信息</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/locker/toLockerManage}">储物柜管理</a></li>
+                    <li class="breadcrumb-item active" id="lockerNumberId" ></li>
+                </ol>
+
+                <div class="card mb-4">
+                    <form th:action="@{/locker/toLockerManage}" method="post" name="addForm"
+                          onsubmit="return beforeSubmit(this)">
+                        <table class="table table-hover">
+                            <tr>
+                                <td text-align="center" th:text="'用户ID：  '+${memberAccount}"></td>
+                            </tr>
+                            <tr>
+                                <td text-align="center" th:text="'储物柜ID：  '+${lockerNumber}"></td>
+                            </tr>
+                            <tr>
+                                <td text-align="center" th:text="'储物柜状态： '+${lockerStatus}"></td>
+                            </tr>
+                        </table>
+                        <div style="text-align:center;margin-top:20px;margin-bottom:20px">
+                            <input type="submit" class="btn btn-outline-success" value="返回">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="adminCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="adminCommon::common-scripts"></div>
+<script type="text/javascript">
+    function insert() {
+        let lockerNumberId=sessionStorage.getItem("locker_number");
+        document.getElementById("lockerNumberId").innerHTML=lockerNumberId;
+    }
+</script>
+</body>
+</html>

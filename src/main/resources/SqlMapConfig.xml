@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--    分页插件的配置-->
+
+<!--    <mappers>
+        <package name="com.hyz.mapper"/>
+    </mappers>-->
+<!--    <settings>-->
+<!--        <setting name="logImpl" value="LOG4J"/>-->
+<!--        &lt;!&ndash;&lt;!&ndash;开启二级缓存&ndash;&gt;-->
+<!--        <setting name="cacheEnabled" value="true"/>&ndash;&gt;-->
+<!--    </settings>-->
+    <settings>
+    <!-- 打印sql日志 -->
+    <setting name="logImpl" value="STDOUT_LOGGING" />
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+</settings>
+
+
+</configuration>

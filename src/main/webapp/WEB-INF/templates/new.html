@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common-header">
+
+    <meta http-equiv="Content-Type"content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content="gym-management-system"/>
+    <title>健身房管理系统-管理员</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
+    <link href="http://at.alicdn.com/t/c/font_3758206_lhed99a3vep.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+</body>
+<script >
+    aa();
+    let bt=document.getElementsByTagName("button");
+    for(let i=1;i<=bt.length;i++){
+        bt[i].onclick=function () {
+            alert("名字"+this.name);
+            alert(bt.length)
+        }
+    }
+    function aa(){
+        let a=10;
+        const container = document.createDocumentFragment();
+        for (let i = 1; i <=a ; i++) {
+            let box = document.createElement("div");
+            box.classList.add("box")
+            let o = document.createElement("div");
+            o.type = "div";
+            o.value = "div" + i;
+            o.classList.add("num")
+            o.innerText ="这是我的编号"
+            box.appendChild(o);
+            o = null;
+            let btn_container = document.createElement("div");
+            btn_container.classList.add("btn_container");
+            for (let j = 1; j <=2 ; j++) {
+                let a=document.createElement("button");
+                a.type = "button";
+                a.value = "button" + j;
+                a.innerText= j == 1?"借出":"归还";
+                a.classList.add("btn")
+                btn_container.appendChild(a);
+                a=null;
+            }
+            box.appendChild(btn_container);
+            container.appendChild(box);
+        }
+        document.body.appendChild(container)
+    }
+</script>
+<style>
+    button{
+        background-color: crimson;
+    }
+    .test{
+        font-size: 128px;
+    }
+    .test:nth-child(odd){
+        font-size: 10rem;
+    }
+    /*//FONTSIZE 尽可能用rem*/
+    /*//宽度的话，用display：flex；或者display:grid；width: $vw，或者%，height和width一样*/
+
+    .box{
+        float: left;
+        display: flex;
+        flex-direction: column;
+        margin: 1em;
+        color: white;
+    }
+    .num{
+        width: 100px;
+        height: 100px;
+        background-color:#333;
+    }
+    .btn{
+        color: white;
+        width: 50px;
+        font-size: .6rem;
+    }
+    .btn_container{
+        display: flex;
+
+    }
+</style>
+</html>
